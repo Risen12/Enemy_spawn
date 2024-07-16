@@ -6,9 +6,11 @@ public class Enemy : MonoBehaviour
 
     private Vector3 _direction = Vector3.zero;
 
-    public void SetDirection(Vector3 direction) => _direction = direction;
-
-    public void SetTarget(Transform target) =>  transform.LookAt(target);
+    public void SetDirection(Vector3 direction, Transform target)
+    { 
+        _direction = direction;
+        transform.LookAt(target);
+    }
 
     private void Update()
     {

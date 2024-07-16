@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Timer : MonoBehaviour
@@ -6,19 +7,26 @@ public class Timer : MonoBehaviour
     public event Func<Enemy> TimeChanged;
 
     private float _delay;
-    private float _timer;
+    private Coroutine _timer;
 
-    private void Start()
+    private void OnEnable()
     {
         _delay = 2f;
-        _timer = _delay;
+        _timer = StartCoroutine(SetTimer(_delay));
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        if (Time.time >= _timer)
+        StopCoroutine(_timer);
+    }
+
+    private IEnumerator SetTimer(float seconds)
+    { 
+        WaitForSeconds wait = new WaitForSeconds(seconds);
+
+        while (true)
         {
-            _timer = Time.time + _delay;
+            yield return new WaitForSeconds(seconds);
             TimeChanged?.Invoke();
         }
     }
