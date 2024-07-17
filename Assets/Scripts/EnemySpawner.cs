@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Timer _timer;
     [SerializeField] private Enemy _enemyPrefab;
     [SerializeField] private List<Transform> _spawnPositions;
-    [SerializeField] private Transform _target;
+    [SerializeField] private Transform _finishZone;
     [SerializeField] private int _defaultPoolCapacity = 40;
     [SerializeField] private int _maxPoolSize = 100;
 
@@ -26,8 +26,8 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         _zombiesPool = new ObjectPool<Enemy>(
-            createFunc: () => Instantiate(_enemyPrefab, GetRandomSpawnPosition(), Quaternion.Euler(0, 0, 0)),
-            actionOnGet: (enemy) => Get(enemy),
+            createFunc: () => CreateEnemy(),
+            actionOnGet: (enemy) => Spawn(enemy),
             actionOnRelease: (enemy) => enemy.gameObject.SetActive(false),
             actionOnDestroy: (enemy) => Destroy(enemy.gameObject),
             collectionCheck: false,
@@ -36,14 +36,21 @@ public class EnemySpawner : MonoBehaviour
             );
     }
 
-    private void Get(Enemy enemy)
+    public void ReleaseEnemy(Enemy enemy) => _zombiesPool.Release(enemy);
+
+    private void Spawn(Enemy enemy)
     {
         enemy.gameObject.SetActive(true);
         enemy.transform.position = GetRandomSpawnPosition();
-        enemy.SetDirection(Vector3.forward, _target);
+        enemy.SetDirection((_finishZone.position - enemy.transform.position).normalized);
     }
 
-    public void ReleaseEnemy(Enemy enemy) => _zombiesPool.Release(enemy);
+    private Enemy CreateEnemy()
+    {
+        Vector3 spawnPosition = GetRandomSpawnPosition();
+
+        return Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
+    }
 
     private Vector3 GetRandomSpawnPosition() => _spawnPositions[Random.Range(0, _spawnPositions.Count)].position;
 }

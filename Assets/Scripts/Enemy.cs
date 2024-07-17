@@ -6,15 +6,15 @@ public class Enemy : MonoBehaviour
 
     private Vector3 _direction = Vector3.zero;
 
-    public void SetDirection(Vector3 direction, Transform target)
-    { 
-        _direction = direction;
-        transform.LookAt(target);
-    }
-
     private void Update()
     {
-        if(_direction != Vector3.zero)
-            transform.Translate(_direction * _speed * Time.deltaTime);
+        if (_direction != Vector3.zero)
+            transform.Translate(_direction * _speed * Time.deltaTime, Space.World);
+    }
+
+    public void SetDirection(Vector3 direction)
+    { 
+        _direction = direction;
+        transform.rotation = Quaternion.LookRotation(_direction);
     }
 }

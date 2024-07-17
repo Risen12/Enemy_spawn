@@ -431,7 +431,7 @@ Transform:
   m_GameObject: {fileID: 172623281}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.08, y: 0, z: 0}
+  m_LocalPosition: {x: -3, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1118,13 +1118,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timer: {fileID: 1723849285}
-  _enemyPrefab: {fileID: 8659114973916739590, guid: 65e4a930c9f19e04a9ae981d4fce7f0e, type: 3}
+  _enemyPrefab: {fileID: 8665257773648741640, guid: 72a0430a5ce19494e9d388b4965cb089, type: 3}
   _spawnPositions:
   - {fileID: 555822451}
   - {fileID: 525574375}
   - {fileID: 371270231}
-  _direction: {x: 1, y: 0, z: 1}
-  _target: {fileID: 611967479}
+  _finishZone: {fileID: 172623285}
   _defaultPoolCapacity: 40
   _maxPoolSize: 100
 --- !u!4 &477395347
@@ -4132,7 +4131,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7233355286381660974, guid: 3318a0dcc90627d4394e56a36f632ee6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -62.884174
+      value: -60.13
       objectReference: {fileID: 0}
     - target: {fileID: 7233355286381660974, guid: 3318a0dcc90627d4394e56a36f632ee6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4304,7 +4303,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7233355286381660974, guid: 3318a0dcc90627d4394e56a36f632ee6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -64.95418
+      value: -62.22
       objectReference: {fileID: 0}
     - target: {fileID: 7233355286381660974, guid: 3318a0dcc90627d4394e56a36f632ee6, type: 3}
       propertyPath: m_LocalPosition.y

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    public event Func<Enemy> TimeChanged;
-
     private float _delay;
     private Coroutine _timer;
+
+    public event Func<Enemy> TimeChanged;
 
     private void OnEnable()
     {
@@ -24,7 +24,7 @@ public class Timer : MonoBehaviour
     { 
         WaitForSeconds wait = new WaitForSeconds(seconds);
 
-        while (true)
+        while (enabled)
         {
             yield return new WaitForSeconds(seconds);
             TimeChanged?.Invoke();
